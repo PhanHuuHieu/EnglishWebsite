@@ -49,11 +49,12 @@
 </head>
 
 <body>
-,nkln;
-	<c:forEach var="task" items="${listContentstory}">
-		<h5>${task.name}</h5>
-		<h6>${task.content}</h6>
-	</c:forEach>
+<c:forEach var="task1" items="${task1}" >
+<label>${task1.name}</label><label>${task1.contentenglish}</label>
+</c:forEach>
+		
+		
+		
 </body>
 
 </html>

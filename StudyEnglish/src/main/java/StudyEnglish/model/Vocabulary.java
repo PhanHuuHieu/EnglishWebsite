@@ -1,6 +1,7 @@
 package StudyEnglish.model;
 
 import java.io.Serializable;
+import java.util.Comparator;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,7 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity(name="vocabulary")
-public class Vocabulary implements Serializable {
+public class Vocabulary implements Comparator<Vocabulary>{
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int idvocabulary;
@@ -21,17 +22,19 @@ public class Vocabulary implements Serializable {
 	private String example1;
 	private String example2;
 	private int idunit;
+	private int idpart1;
+	
 	@Override
 	public String toString() {
 		return "Vocabulary [idvocabulary=" + idvocabulary + ", image=" + image + ", voca=" + voca + ", spelling="
 				+ spelling + ", idsoundsame=" + idsoundsame + ", idtypeword=" + idtypeword + ", meaning=" + meaning
-				+ ", example1=" + example1 + ", example2=" + example2 + ", idunit=" + idunit + "]";
+				+ ", example1=" + example1 + ", example2=" + example2 + ", idunit=" + idunit + ",idpart1="+idpart1+"]";
 	}
 	public Vocabulary() {
 		
 	}
 	public Vocabulary(String image, String voca, String spelling, int idsoundsame, int idtypeword, String meaning,
-			String example1, String example2, int idunit) {
+			String example1, String example2, int idunit,int idpart1) {
 		super();
 		this.image = image;
 		this.voca = voca;
@@ -42,6 +45,13 @@ public class Vocabulary implements Serializable {
 		this.example1 = example1;
 		this.example2 = example2;
 		this.idunit = idunit;
+		this.idpart1=idpart1;
+	}
+	public int getIdpart1() {
+		return idpart1;
+	}
+	public void setIdpart1(int idpart1) {
+		this.idpart1 = idpart1;
 	}
 	public int getIdvocabulary() {
 		return idvocabulary;
@@ -103,5 +113,8 @@ public class Vocabulary implements Serializable {
 	public void setIdunit(int idunit) {
 		this.idunit = idunit;
 	}
-	
+	@Override
+	public int compare(Vocabulary o1, Vocabulary o2) {
+		return o1.voca.compareTo(o2.voca);
+	}
 }
