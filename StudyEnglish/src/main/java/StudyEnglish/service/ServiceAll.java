@@ -11,7 +11,7 @@ import StudyEnglish.dao.MytopicRepository;
 import StudyEnglish.dao.MyvocabularyRepository;
 import StudyEnglish.dao.Part1Repository;
 import StudyEnglish.dao.ProccessRepository;
-import StudyEnglish.dao.SoundsameRepository;
+
 import StudyEnglish.dao.TypewordRepository;
 import StudyEnglish.dao.UnitRepository;
 import StudyEnglish.dao.UsersRepository;
@@ -22,7 +22,6 @@ import StudyEnglish.model.Mytopic;
 import StudyEnglish.model.Myvocabulary;
 import StudyEnglish.model.Part1;
 import StudyEnglish.model.Proccess;
-import StudyEnglish.model.Soundsame;
 import StudyEnglish.model.Typeword;
 import StudyEnglish.model.Unit;
 import StudyEnglish.model.Users;
@@ -30,7 +29,7 @@ import StudyEnglish.model.Vocabulary;
 @Service
 public class ServiceAll {
 	public final ProccessRepository proccessRp;
-	public final SoundsameRepository soundsameRp;
+//	public final SoundsameRepository soundsameRp;
 	public final TypewordRepository typewordRp;
 	public final UnitRepository unitRp;
 	public final UsersRepository usersRp;
@@ -41,13 +40,13 @@ public class ServiceAll {
 	public final MytopicRepository mytopicRp;
 	public final MyvocabularyRepository myvocabularyRp;
 	public final Part1Repository part1Rp;
-	public ServiceAll(ProccessRepository proccessRp,SoundsameRepository soundsameRp,
+	public ServiceAll(ProccessRepository proccessRp,
 			TypewordRepository typewordRp,UnitRepository unitRp,UsersRepository usersRp,
 			VocabularyRepository vocabularyRp, AudioRepository audioRp, ContentstoryRepository contentstoryRp,
 			MytopicRepository mytopicRp,MyvocabularyRepository myvocabularyRp, Part1Repository part1Rp)
 	{
 		this.proccessRp=proccessRp;
-		this.soundsameRp=soundsameRp;
+	//	this.soundsameRp=soundsameRp;
 		this.typewordRp=typewordRp;
 		this.unitRp=unitRp;
 		this.usersRp=usersRp;
@@ -66,13 +65,7 @@ public class ServiceAll {
 		}
 		return tasks;
 	}
-	public List<Soundsame> findAllSoundSame(){
-		List<Soundsame>tasks=new ArrayList<Soundsame>();
-		for(Soundsame task:soundsameRp.findAll()) {
-			tasks.add(task);
-		}
-		return tasks;
-	}
+	
 	public List<Typeword> findAllTypeWord(){
 		List<Typeword>tasks=new ArrayList<Typeword>();
 		for(Typeword task:typewordRp.findAll()) {
