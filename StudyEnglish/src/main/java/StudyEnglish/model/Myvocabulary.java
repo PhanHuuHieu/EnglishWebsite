@@ -69,5 +69,4 @@ public class Myvocabulary implements Serializable {
 	public void setIdusers(int idusers) {
 		this.idusers = idusers;
 	}
-
 }

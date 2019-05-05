@@ -130,5 +130,20 @@ public class ServiceAll {
 		return tasks;
 	}
 
-	
+	public void saveMyTopic(Mytopic mytopic)
+	{
+		mytopicRp.save(mytopic);
+	}
+	public void DeleteMyTopic(int id)
+	{
+		mytopicRp.deleteById(id);
+	}
+	public void saveMyVocabulary(Myvocabulary myvocabulary)
+	{
+		myvocabularyRp.save(myvocabulary);
+	}
+	public void deleteMyVocabulary(int id)
+	{
+		myvocabularyRp.deleteById(id);
+	}
 }

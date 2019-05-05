@@ -10,8 +10,11 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -36,7 +39,7 @@ public class MainController {
 	@Autowired
 	private ServiceAll sv;
 	
-	//@CrossOrigin(origins = "http://localhost:3000")
+	@CrossOrigin(origins = "http://localhost:3000")
 	@GetMapping("/JSONTypeword")
 	@ResponseBody
 	public List<Typeword> JSONTypeword() {
@@ -44,7 +47,7 @@ public class MainController {
 		list=sv.findAllTypeWord();
 	    return list;
 	}
-	
+	@CrossOrigin(origins = "http://localhost:3000")
 	@GetMapping("/JSONUnit")
 	@ResponseBody
 	public List<Unit> JSONUnit() {
@@ -52,7 +55,7 @@ public class MainController {
 		list=sv.findAllUnit();
 	    return list;
 	}
-	
+	@CrossOrigin(origins = "http://localhost:3000")
 	@GetMapping("/JSONUsers")
 	@ResponseBody
 	public List<Users> JSONUsers() {
@@ -60,7 +63,7 @@ public class MainController {
 		list=sv.findAllUsers();
 	    return list;
 	}
-	
+	@CrossOrigin(origins = "http://localhost:3000")
 	@GetMapping("/JSONVocabulary")//Load vocabulary part 2
 	@ResponseBody
 	public List<Vocabulary> JSONVocabulary() {
@@ -77,6 +80,7 @@ public class MainController {
 		Collections.sort(listVocaPart2, new Vocabulary());
 	    return listVocaPart2;
 	}
+	@CrossOrigin(origins = "http://localhost:3000")
 	@GetMapping("/JSONAudio")
 	@ResponseBody
 	public List<Audio> JSONAudio() {
@@ -84,6 +88,7 @@ public class MainController {
 		list=sv.findAllAudio();
 	    return list;
 	}
+	@CrossOrigin(origins = "http://localhost:3000")
 	@GetMapping("/JSONContentstory")
 	@ResponseBody
 	public List<Contentstory> JSONContentstory() {
@@ -91,13 +96,14 @@ public class MainController {
 		list=sv.findAllContentstory();
 	    return list;
 	}
+	@CrossOrigin(origins = "http://localhost:3000")
 	@GetMapping("/JSONMytopic")
 	@ResponseBody
 	public List<Mytopic> JSONMytopic() {
 		List<Mytopic> list=new ArrayList<Mytopic>();
 		list=sv.findAllMytopic();
 	    return list;
-	}
+	}@CrossOrigin(origins = "http://localhost:3000")
 	@GetMapping("/JSONMyvocabulary")
 	@ResponseBody
 	public List<Myvocabulary> JSONMyvocabulary() {
@@ -105,6 +111,7 @@ public class MainController {
 		list=sv.findAllMyvocabulary();
 	    return list;
 	}
+	@CrossOrigin(origins = "http://localhost:3000")
 	@GetMapping("/JSONPart1")
 	@ResponseBody
 	public List<Part1> JSONPart1() {
@@ -112,6 +119,7 @@ public class MainController {
 		list=sv.findAllPart1();
 	    return list;
 	}
+	@CrossOrigin(origins = "http://localhost:3000")
 	@GetMapping("/JSONContentstoryTextbox")
 	@ResponseBody
 	public List<Contentstory> TraVe3ChamTrongContent(HttpServletRequest request) {
@@ -136,5 +144,25 @@ public class MainController {
 			
 		}
 		return list;
+	}
+	@CrossOrigin(origins = "http://localhost:3000")
+	@PostMapping("/SaveMyTopic")
+	public void saveTasks(Mytopic mytopic) {
+		sv.saveMyTopic(mytopic);
+	}
+	@CrossOrigin(origins = "http://localhost:3000")
+	@PostMapping("/DeleteMyTopic")
+	public void deleteTasks(int id) {
+		sv.DeleteMyTopic(id);
+	}
+	@CrossOrigin(origins = "http://localhost:3000")
+	@PostMapping("/DeleteMyVocabulary")
+	public void deleteMyVocabulary(int id) {
+		sv.DeleteMyTopic(id);;
+	}
+	@CrossOrigin(origins = "http://localhost:3000")
+	@PostMapping("/SaveMyVocabulary")
+	public void saveMyVOcabulary(@ModelAttribute Myvocabulary myvocabulary,BindingResult bindingResult, HttpServletRequest request) {
+		sv.saveMyVocabulary(myvocabulary);
 	}
 }
