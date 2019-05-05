@@ -130,7 +130,7 @@ public class MainController {
 		list=sv.findAllPart1();
 	    return list;
 	}
-	//@CrossOrigin(origins = "http://localhost:3000")
+	@CrossOrigin(origins = "http://localhost:3000")
 	@GetMapping("/JSONContentstoryTextbox")
 	@ResponseBody
 	public List<Contentstory> TraVe3ChamTrongContent(HttpServletRequest request) {
@@ -156,7 +156,7 @@ public class MainController {
 		}
 		return list;
 	}
-	//@CrossOrigin(origins = "http://localhost:3000")
+	@CrossOrigin(origins = "http://localhost:3000")
 	@PostMapping("/SaveMyTopic")
 	@ResponseBody
 	public void saveMyTopic(@RequestBody JSONObject MyTopicObj) {
@@ -168,13 +168,13 @@ public class MainController {
         Mytopic mytopic=new Mytopic(subject,content,idunit,idusers);
         sv.saveMyTopic(mytopic);
 	}
-	//@CrossOrigin(origins = "http://localhost:3000")
+	@CrossOrigin(origins = "http://localhost:3000")
 	@PostMapping("/DeleteMyTopic")
 	@ResponseBody
 	public void deleteMyTopic(int id) {
 		sv.DeleteMyTopic(id);
 	}
-	//@CrossOrigin(origins = "http://localhost:3000")
+	@CrossOrigin(origins = "http://localhost:3000")
 	@ResponseBody
 	@PostMapping("/DeleteMyVocabulary")
 	public void deleteMyVocabulary(int id) {
