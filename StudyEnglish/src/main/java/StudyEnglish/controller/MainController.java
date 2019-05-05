@@ -147,7 +147,7 @@ public class MainController {
 	}
 	@CrossOrigin(origins = "http://localhost:3000")
 	@PostMapping("/SaveMyTopic")
-	public void saveTasks(Mytopic mytopic) {
+	public void saveTasks(@ModelAttribute Mytopic mytopic) {
 		sv.saveMyTopic(mytopic);
 	}
 	@CrossOrigin(origins = "http://localhost:3000")

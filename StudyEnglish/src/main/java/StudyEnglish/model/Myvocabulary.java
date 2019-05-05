@@ -12,26 +12,23 @@ public class Myvocabulary implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int idmyvocabulary;
-	private String wordenglish;
-	private String wordvietsub;
+	private String image;
+	private String voca;
 	private String spelling;
 	private int idtypeword;
+	private String meaning;
+	private String example1;
+	private String example2;
+	private int idunit;
+	private int idpart1;
+	private String contentsoundsame;
 	private int idusers;
 	@Override
 	public String toString() {
-		return "Myvocabulary [idmyvocabulary=" + idmyvocabulary + ", wordenglish=" + wordenglish + ", wordvietsub="
-				+ wordvietsub + ", spelling=" + spelling + ", idtypeword=" + idtypeword + ", idusers=" + idusers + "]";
-	}
-	public Myvocabulary() {
-		
-	}
-	public Myvocabulary(String wordenglish, String wordvietsub, String spelling, int idtypeword, int idusers) {
-		super();
-		this.wordenglish = wordenglish;
-		this.wordvietsub = wordvietsub;
-		this.spelling = spelling;
-		this.idtypeword = idtypeword;
-		this.idusers = idusers;
+		return "Myvocabulary [idmyvocabulary=" + idmyvocabulary + ", image=" + image + ", voca=" + voca + ", spelling="
+				+ spelling + ", idtypeword=" + idtypeword + ", meaning=" + meaning + ", example1=" + example1
+				+ ", example2=" + example2 + ", idunit=" + idunit + ", idpart1=" + idpart1 + ", contentsoundsame="
+				+ contentsoundsame + ", idusers=" + idusers + "]";
 	}
 	public int getIdmyvocabulary() {
 		return idmyvocabulary;
@@ -39,17 +36,17 @@ public class Myvocabulary implements Serializable {
 	public void setIdmyvocabulary(int idmyvocabulary) {
 		this.idmyvocabulary = idmyvocabulary;
 	}
-	public String getWordenglish() {
-		return wordenglish;
+	public String getImage() {
+		return image;
 	}
-	public void setWordenglish(String wordenglish) {
-		this.wordenglish = wordenglish;
+	public void setImage(String image) {
+		this.image = image;
 	}
-	public String getWordvietsub() {
-		return wordvietsub;
+	public String getVoca() {
+		return voca;
 	}
-	public void setWordvietsub(String wordvietsub) {
-		this.wordvietsub = wordvietsub;
+	public void setVoca(String voca) {
+		this.voca = voca;
 	}
 	public String getSpelling() {
 		return spelling;
@@ -63,10 +60,50 @@ public class Myvocabulary implements Serializable {
 	public void setIdtypeword(int idtypeword) {
 		this.idtypeword = idtypeword;
 	}
+	public String getMeaning() {
+		return meaning;
+	}
+	public void setMeaning(String meaning) {
+		this.meaning = meaning;
+	}
+	public String getExample1() {
+		return example1;
+	}
+	public void setExample1(String example1) {
+		this.example1 = example1;
+	}
+	public String getExample2() {
+		return example2;
+	}
+	public void setExample2(String example2) {
+		this.example2 = example2;
+	}
+	public int getIdunit() {
+		return idunit;
+	}
+	public void setIdunit(int idunit) {
+		this.idunit = idunit;
+	}
+	public int getIdpart1() {
+		return idpart1;
+	}
+	public void setIdpart1(int idpart1) {
+		this.idpart1 = idpart1;
+	}
+	public String getContentsoundsame() {
+		return contentsoundsame;
+	}
+	public void setContentsoundsame(String contentsoundsame) {
+		this.contentsoundsame = contentsoundsame;
+	}
 	public int getIdusers() {
 		return idusers;
 	}
 	public void setIdusers(int idusers) {
 		this.idusers = idusers;
 	}
+	
+
+	
 }
+

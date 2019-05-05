@@ -24,13 +24,17 @@ public class Vocabulary implements Comparator<Vocabulary>{
 	private int idunit;
 	private int idpart1;
 	private String contentsoundsame;
+	private String additional;
 	
 
+	
+	
 	@Override
 	public String toString() {
 		return "Vocabulary [idvocabulary=" + idvocabulary + ", image=" + image + ", voca=" + voca + ", spelling="
-				+ spelling + ", idtypeword=" + idtypeword + ", meaning=" + meaning
-				+ ", example1=" + example1 + ", example2=" + example2 + ", idunit=" + idunit + ",idpart1="+idpart1+",contentsoundsame="+contentsoundsame+"]";
+				+ spelling + ", idtypeword=" + idtypeword + ", meaning=" + meaning + ", example1=" + example1
+				+ ", example2=" + example2 + ", idunit=" + idunit + ", idpart1=" + idpart1 + ", contentsoundsame="
+				+ contentsoundsame + ", additional=" + additional + "]";
 	}
 	public Vocabulary() {
 		
@@ -49,6 +53,12 @@ public class Vocabulary implements Comparator<Vocabulary>{
 		this.idunit = idunit;
 		this.idpart1=idpart1;
 		this.contentsoundsame=contentsoundsame;
+	}
+	public String getAdditional() {
+		return additional;
+	}
+	public void setAdditional(String additional) {
+		this.additional = additional;
 	}
 	public String getContentsoundsame() {
 		return contentsoundsame;
