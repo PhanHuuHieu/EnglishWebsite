@@ -1,14 +1,21 @@
 package StudyEnglish.controller;
 
+import java.net.URISyntaxException;
+import java.security.acl.Group;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -16,8 +23,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
@@ -103,7 +113,8 @@ public class MainController {
 		List<Mytopic> list=new ArrayList<Mytopic>();
 		list=sv.findAllMytopic();
 	    return list;
-	}@CrossOrigin(origins = "http://localhost:3000")
+	}
+	@CrossOrigin(origins = "http://localhost:3000")
 	@GetMapping("/JSONMyvocabulary")
 	@ResponseBody
 	public List<Myvocabulary> JSONMyvocabulary() {
@@ -119,7 +130,7 @@ public class MainController {
 		list=sv.findAllPart1();
 	    return list;
 	}
-	@CrossOrigin(origins = "http://localhost:3000")
+	//@CrossOrigin(origins = "http://localhost:3000")
 	@GetMapping("/JSONContentstoryTextbox")
 	@ResponseBody
 	public List<Contentstory> TraVe3ChamTrongContent(HttpServletRequest request) {
@@ -145,24 +156,50 @@ public class MainController {
 		}
 		return list;
 	}
-	@CrossOrigin(origins = "http://localhost:3000")
+	//@CrossOrigin(origins = "http://localhost:3000")
 	@PostMapping("/SaveMyTopic")
-	public void saveTasks(@ModelAttribute Mytopic mytopic) {
-		sv.saveMyTopic(mytopic);
+	@ResponseBody
+	public void saveMyTopic(@RequestBody JSONObject MyTopicObj) {
+		JSONObject json = new JSONObject(MyTopicObj);
+		String subject = json.get("subject").toString();
+        String content = json.get("content").toString();
+        int idunit= Integer.parseInt(json.get("idunit").toString()) ;
+        int idusers=Integer.parseInt(json.get("idusers").toString()) ;
+        Mytopic mytopic=new Mytopic(subject,content,idunit,idusers);
+        sv.saveMyTopic(mytopic);
 	}
-	@CrossOrigin(origins = "http://localhost:3000")
+	//@CrossOrigin(origins = "http://localhost:3000")
 	@PostMapping("/DeleteMyTopic")
-	public void deleteTasks(int id) {
+	@ResponseBody
+	public void deleteMyTopic(int id) {
+		sv.DeleteMyTopic(id);
+	}
+	//@CrossOrigin(origins = "http://localhost:3000")
+	@ResponseBody
+	@PostMapping("/DeleteMyVocabulary")
+	public void deleteMyVocabulary(int id) {
 		sv.DeleteMyTopic(id);
 	}
 	@CrossOrigin(origins = "http://localhost:3000")
-	@PostMapping("/DeleteMyVocabulary")
-	public void deleteMyVocabulary(int id) {
-		sv.DeleteMyTopic(id);;
-	}
-	@CrossOrigin(origins = "http://localhost:3000")
 	@PostMapping("/SaveMyVocabulary")
-	public void saveMyVOcabulary(@ModelAttribute Myvocabulary myvocabulary,BindingResult bindingResult, HttpServletRequest request) {
-		sv.saveMyVocabulary(myvocabulary);
+	@ResponseBody
+	public void saveMyVOcabulary(@RequestBody JSONObject MyVocaObj)
+	{
+		JSONObject json = new JSONObject(MyVocaObj);
+		String image = json.get("image").toString();
+        String voca = json.get("voca").toString();
+        String spelling= json.get("spelling").toString();
+        int idtypeword=Integer.parseInt(json.get("idtypeword").toString()) ;
+        String meaning= json.get("meaning").toString();
+        String example1= json.get("example1").toString();
+        String example2= json.get("example2").toString();
+        int idunit= Integer.parseInt(json.get("idunit").toString()) ;
+        int idpart1= Integer.parseInt(json.get("idpart1").toString()) ;
+        String contentsoundsame=json.get("contentsoundsame").toString();
+        int idusers= Integer.parseInt(json.get("idusers").toString()) ;
+        Myvocabulary myvocabulary=new Myvocabulary(image,voca,spelling,idtypeword,
+        		meaning,example1,example2,idunit,idpart1,contentsoundsame,idusers);
+        sv.saveMyVocabulary(myvocabulary);
 	}
+	    	    
 }

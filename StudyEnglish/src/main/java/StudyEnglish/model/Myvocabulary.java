@@ -23,6 +23,21 @@ public class Myvocabulary implements Serializable {
 	private int idpart1;
 	private String contentsoundsame;
 	private int idusers;
+	public Myvocabulary( String image, String voca, String spelling, int idtypeword, String meaning,
+			String example1, String example2, int idunit, int idpart1, String contentsoundsame, int idusers) {
+		super();
+		this.image = image;
+		this.voca = voca;
+		this.spelling = spelling;
+		this.idtypeword = idtypeword;
+		this.meaning = meaning;
+		this.example1 = example1;
+		this.example2 = example2;
+		this.idunit = idunit;
+		this.idpart1 = idpart1;
+		this.contentsoundsame = contentsoundsame;
+		this.idusers = idusers;
+	}
 	@Override
 	public String toString() {
 		return "Myvocabulary [idmyvocabulary=" + idmyvocabulary + ", image=" + image + ", voca=" + voca + ", spelling="
@@ -30,6 +45,10 @@ public class Myvocabulary implements Serializable {
 				+ ", example2=" + example2 + ", idunit=" + idunit + ", idpart1=" + idpart1 + ", contentsoundsame="
 				+ contentsoundsame + ", idusers=" + idusers + "]";
 	}
+	public Myvocabulary() {
+		
+	}
+	
 	public int getIdmyvocabulary() {
 		return idmyvocabulary;
 	}
