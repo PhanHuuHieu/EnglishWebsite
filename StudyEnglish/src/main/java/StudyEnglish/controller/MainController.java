@@ -159,14 +159,8 @@ public class MainController {
 	@CrossOrigin(origins = "http://localhost:3000")
 	@PostMapping("/SaveMyTopic")
 	@ResponseBody
-	public void saveMyTopic(@RequestBody JSONObject MyTopicObj) {
-		JSONObject json = new JSONObject(MyTopicObj);
-		String subject = json.get("subject").toString();
-        String content = json.get("content").toString();
-        int idunit= Integer.parseInt(json.get("idunit").toString()) ;
-        int idusers=Integer.parseInt(json.get("idusers").toString()) ;
-        Mytopic mytopic=new Mytopic(subject,content,idunit,idusers);
-        sv.saveMyTopic(mytopic);
+	public void saveMyTopic(@Valid @RequestBody Mytopic MyTopicObj) {
+        sv.saveMyTopic(MyTopicObj);
 	}
 	@CrossOrigin(origins = "http://localhost:3000")
 	@PostMapping("/DeleteMyTopic")
@@ -183,23 +177,9 @@ public class MainController {
 	@CrossOrigin(origins = "http://localhost:3000")
 	@PostMapping("/SaveMyVocabulary")
 	@ResponseBody
-	public void saveMyVOcabulary(@RequestBody JSONObject MyVocaObj)
+	public void saveMyVOcabulary(@Valid @RequestBody Myvocabulary MyVocaObj)
 	{
-		JSONObject json = new JSONObject(MyVocaObj);
-		String image = json.get("image").toString();
-        String voca = json.get("voca").toString();
-        String spelling= json.get("spelling").toString();
-        int idtypeword=Integer.parseInt(json.get("idtypeword").toString()) ;
-        String meaning= json.get("meaning").toString();
-        String example1= json.get("example1").toString();
-        String example2= json.get("example2").toString();
-        int idunit= Integer.parseInt(json.get("idunit").toString()) ;
-        int idpart1= Integer.parseInt(json.get("idpart1").toString()) ;
-        String contentsoundsame=json.get("contentsoundsame").toString();
-        int idusers= Integer.parseInt(json.get("idusers").toString()) ;
-        Myvocabulary myvocabulary=new Myvocabulary(image,voca,spelling,idtypeword,
-        		meaning,example1,example2,idunit,idpart1,contentsoundsame,idusers);
-        sv.saveMyVocabulary(myvocabulary);
+        sv.saveMyVocabulary(MyVocaObj);
 	}
 	    	    
 }
