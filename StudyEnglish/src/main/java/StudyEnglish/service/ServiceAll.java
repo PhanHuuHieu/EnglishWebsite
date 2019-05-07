@@ -65,6 +65,8 @@ public class ServiceAll {
 		for(Proccess task:proccessRp.findAll()) {
 			tasks.add(task);
 		}
+	    if(tasks==null)
+	    	tasks.get(0).setIdprocess(-1);
 		return tasks;
 	}
 	
@@ -147,5 +149,20 @@ public class ServiceAll {
 	public void deleteMyVocabulary(int id)
 	{
 		myvocabularyRp.deleteById(id);
+	}
+	public void saveProcess(Proccess process)
+	{
+		proccessRp.save(process);
+	}
+	public Proccess findProcessWithID(int id)
+	{
+		List<Proccess>dts=new ArrayList<Proccess>();
+		for(Proccess dt:proccessRp.findAll()) {
+			if(dt.getIdprocess()==id)
+			{
+				return dt;
+			}
+		}
+		return null;
 	}
 }

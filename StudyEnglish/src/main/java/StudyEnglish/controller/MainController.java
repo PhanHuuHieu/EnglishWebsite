@@ -1,5 +1,7 @@
 package StudyEnglish.controller;
 
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.URISyntaxException;
 import java.security.acl.Group;
 import java.util.ArrayList;
@@ -181,5 +183,85 @@ public class MainController {
 	{
         sv.saveMyVocabulary(MyVocaObj);
 	}
+	@CrossOrigin(origins = "http://localhost:3000")
+	@PostMapping("/CheckProcess")// Lưu quá trình học khi user học thêm part or unit mới
+	@ResponseBody
+	public void checkProcess(@RequestParam String unit,@RequestParam String part,@RequestParam int user) {
+		Proccess pc=new Proccess();
+		
+		List<Proccess> list1=new ArrayList<Proccess>();
+		list1=sv.findAllProccess();
+		List<Proccess> list=new ArrayList<Proccess>();
+		for(int i=0;i<list1.size();i++)
+		{
+			if(user==list1.get(i).getIduser())
+			{
+				list.add(list1.get(i));
+			}
+		}
+			if(list.size()>0)
+			{
+				if(Integer.parseInt(part)>Integer.parseInt(list.get(list.size()-1).getPart())){
+					if(Integer.parseInt(unit)>=Integer.parseInt(list.get(list.size()-1).getUnit()))
+					{
+
+				
+						pc.setIduser(user);
+						pc.setPart(part);
+						pc.setUnit(unit);
+						sv.saveProcess(pc);
+					}
+				}	
+			}
+			
+			else
+			{
+				pc.setIduser(user);
+				pc.setPart("1");
+				pc.setUnit("1");
+				sv.saveProcess(pc);
+				if(Integer.parseInt(part)>Integer.parseInt(list.get(list.size()-1).getPart())){
+					if(Integer.parseInt(unit)>=Integer.parseInt(list.get(list.size()-1).getUnit()))
+					{
+
+						pc.setIduser(user);
+						pc.setPart(part);
+						pc.setUnit(unit);
+						sv.saveProcess(pc);
+					}
+				}	
+			}
+		
+	//	System.out.println(unit+" "+part+" "+user+" "+check);
+		
+	}
+	@CrossOrigin(origins = "http://localhost:3000")
+	@PostMapping("/GetProcess")// Lấy quá trình học mới nhất của user
+	@ResponseBody
+	public List<Proccess> getProcess()
+	{
+		List<Proccess> list1=new ArrayList<Proccess>();
+		list1=sv.findAllProccess();
+		List<Proccess> list=new ArrayList<Proccess>();
+		list.add(list1.get(list1.size()-1));
+		return list1;
+	}
+	@GetMapping("/paging")// phan trang
+	@ResponseBody
+	public List<Vocabulary> nextpage(@RequestParam int page)
+	{
+		int countVoca=6;
+		int vt=page-1;
+		vt=vt*countVoca;
+		List<Vocabulary> list=sv.findAllVocabulary();
+		List<Vocabulary> listDisplay=new ArrayList<Vocabulary>();
+		for(int i=vt;i<vt+countVoca;i++)
+		{
+			listDisplay.add(list.get(i));
+		}
+		return listDisplay;
+	}
+	
+	
 	    	    
 }
