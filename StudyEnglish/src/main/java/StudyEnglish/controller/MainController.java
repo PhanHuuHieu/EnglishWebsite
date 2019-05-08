@@ -167,14 +167,18 @@ public class MainController {
 	@CrossOrigin(origins = "http://localhost:3000")
 	@PostMapping("/DeleteMyTopic")
 	@ResponseBody
-	public void deleteMyTopic(int id) {
+	public void deleteMyTopic(@RequestBody JSONObject idTopic) {
+		JSONObject json = new JSONObject(idTopic);
+		int id =Integer.parseInt( json.get("idmytopic").toString());
 		sv.DeleteMyTopic(id);
 	}
 	@CrossOrigin(origins = "http://localhost:3000")
 	@ResponseBody
 	@PostMapping("/DeleteMyVocabulary")
-	public void deleteMyVocabulary(int id) {
-		sv.DeleteMyTopic(id);
+	public void deleteMyVocabulary(@RequestBody JSONObject idVoca) {
+		JSONObject json = new JSONObject(idVoca);
+		int id =Integer.parseInt(json.get("idmyvocabulary").toString());
+		sv.deleteMyVocabulary(id);
 	}
 	@CrossOrigin(origins = "http://localhost:3000")
 	@PostMapping("/SaveMyVocabulary")
@@ -186,7 +190,12 @@ public class MainController {
 	@CrossOrigin(origins = "http://localhost:3000")
 	@PostMapping("/CheckProcess")// Lưu quá trình học khi user học thêm part or unit mới
 	@ResponseBody
-	public void checkProcess(@RequestParam String unit,@RequestParam String part,@RequestParam int user) {
+	public void checkProcess(@RequestBody JSONObject checkProcess) {
+		//@RequestParam String unit,@RequestParam String part,@RequestParam int user
+		JSONObject json = new JSONObject(checkProcess);
+		String unit = json.get("unit").toString();
+		String part = json.get("part").toString();
+		int user = Integer.parseInt(json.get("iduser").toString());
 		Proccess pc=new Proccess();
 		
 		List<Proccess> list1=new ArrayList<Proccess>();
@@ -248,10 +257,12 @@ public class MainController {
 	}
 	@GetMapping("/paging")// phan trang
 	@ResponseBody
-	public List<Vocabulary> nextpage(@RequestParam int page)
+	public List<Vocabulary> nextpage(@RequestBody JSONObject page)
 	{
+		JSONObject json = new JSONObject(page);
+		int idpage =Integer.parseInt(json.get("idpage").toString());
 		int countVoca=6;
-		int vt=page-1;
+		int vt=idpage-1;
 		vt=vt*countVoca;
 		List<Vocabulary> list=sv.findAllVocabulary();
 		List<Vocabulary> listDisplay=new ArrayList<Vocabulary>();
