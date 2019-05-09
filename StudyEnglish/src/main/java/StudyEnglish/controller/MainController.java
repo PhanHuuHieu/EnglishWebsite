@@ -174,7 +174,7 @@ public class MainController {
 	}
 	@CrossOrigin(origins = "http://localhost:3000")
 	@ResponseBody
-	@PostMapping("/DeleteMyVocabulary")
+	@PostMapping("/DeleteMyVocabulary") //xoa
 	public void deleteMyVocabulary(@RequestBody JSONObject idVoca) {
 		JSONObject json = new JSONObject(idVoca);
 		int id =Integer.parseInt(json.get("idmyvocabulary").toString());
@@ -240,9 +240,7 @@ public class MainController {
 					}
 				}	
 			}
-		
-	//	System.out.println(unit+" "+part+" "+user+" "+check);
-		
+
 	}
 	@CrossOrigin(origins = "http://localhost:3000")
 	@PostMapping("/GetProcess")// Lấy quá trình học mới nhất của user
