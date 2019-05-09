@@ -174,7 +174,7 @@ public class MainController {
 	}
 	@CrossOrigin(origins = "http://localhost:3000")
 	@ResponseBody
-	@PostMapping("/DeleteMyVocabulary") //xoa
+	@PostMapping("/DeleteMyVocabulary") 
 	public void deleteMyVocabulary(@RequestBody JSONObject idVoca) {
 		JSONObject json = new JSONObject(idVoca);
 		int id =Integer.parseInt(json.get("idmyvocabulary").toString());
