@@ -39,6 +39,7 @@ import StudyEnglish.model.Mytopic;
 import StudyEnglish.model.Myvocabulary;
 import StudyEnglish.model.Part1;
 import StudyEnglish.model.Proccess;
+import StudyEnglish.model.TalkResource;
 import StudyEnglish.model.Typeword;
 import StudyEnglish.model.Unit;
 import StudyEnglish.model.Users;
@@ -136,25 +137,31 @@ public class MainController {
 	@GetMapping("/JSONContentstoryTextbox")
 	@ResponseBody
 	public List<Contentstory> TraVe3ChamTrongContent(HttpServletRequest request) {
-		List<Contentstory> list=new ArrayList<Contentstory>();
-		List<Vocabulary> listVoca=new ArrayList<Vocabulary>();
-		
-		listVoca=sv.findAllVocabulary();
-		list=sv.findAllContentstory();
-		String l="";
-		String temp="";
-		for(int i=0;i<list.size();i++)
-		{
-			for(int j=0;j<listVoca.size();j++)
-			{
-				if(!(list.get(i).getContentenglish().indexOf(listVoca.get(j).getVoca())==-1))
-				{
-					temp="<input name='"+listVoca.get(j).getIdvocabulary()+"'"+"></input>";
-					l=list.get(i).getContentenglish().replace(listVoca.get(j).getVoca(),temp);
-					list.get(i).setContentenglish(l);			
+		List<Contentstory> list = new ArrayList<Contentstory>();
+		List<Vocabulary> listVoca = JSONVocabulary();
+ 
+		listVoca = sv.findAllVocabulary();
+		list = sv.findAllContentstory();
+		String l = "";
+		String temp = "";
+		int key = 1;
+ 
+		for (int i = 0; i < list.size(); i++) {
+ 
+			for (int j = 0; j < listVoca.size(); j++) {
+				if (!(list.get(i).getContentenglish().indexOf(listVoca.get(j).getVoca()) == -1)) {
+					temp = "<input id='" + (1001 + key++) + "'" + " class='input-part1' "
+					+"   maxLength='14'></input>";
+					l = list.get(i).getContentenglish()
+							.replace( listVoca.get(j).getVoca(), temp);
+					list.get(i).setContentenglish(l);
+					//TODO:
+					//replace("<span style='color: #ff0000;'>" + listVoca.get(j).getVoca() + "</span>", temp);
+					//Đổi lại style='color: #ff0000;' thành class='voca-part1'
+ 
 				}
 			}
-			
+ 
 		}
 		return list;
 	}
@@ -253,7 +260,8 @@ public class MainController {
 		list.add(list1.get(list1.size()-1));
 		return list1;
 	}
-	@GetMapping("/paging")// phan trang
+	@CrossOrigin(origins = "http://localhost:3000")
+	@PostMapping("/paging")// phan trang
 	@ResponseBody
 	public List<Vocabulary> nextpage(@RequestBody JSONObject page)
 	{
@@ -270,7 +278,12 @@ public class MainController {
 		}
 		return listDisplay;
 	}
-	
-	
-	    	    
+	@CrossOrigin(origins = "http://localhost:3000")
+	@PostMapping("/Audio")
+	@ResponseBody
+	public TalkResource JSON(@RequestBody JSONObject jsonAudio) {
+		JSONObject json = new JSONObject(jsonAudio);
+		String audio =json.get("audio").toString();
+	    return new TalkResource(audio);
+	}
 }
